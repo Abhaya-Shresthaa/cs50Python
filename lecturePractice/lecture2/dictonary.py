@@ -2,7 +2,7 @@ students = {
     "Abhaya" : "Shrestha",
     "Chandan" : "Shah",
     "Kushal" : "Regmi",
-    "Asmit" : "Khana;",
+    "Asmit" : "Khanal",
     "Darpan" : "Giri"
 }
 
@@ -12,6 +12,9 @@ print(students["Chandan"])
 print(students["Darpan"])
 print(students["Kushal"])
 
+print()
+for student in students:
+    print(student, students[student])
 
 
 
