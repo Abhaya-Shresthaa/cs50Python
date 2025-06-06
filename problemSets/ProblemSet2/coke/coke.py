@@ -1,15 +1,21 @@
 def main():
     # while True: 
     #     print("hello")
-    n = int(input("Enter"))
-    validate(n)
-def validate(input):
+    totalAmount = 50
+    while True: 
+        print("Amount Due:", totalAmount)
+        n = int(input("Insert Coin: "))
+        totalAmount = validate(totalAmount, n)
+        if totalAmount <= 0:
+            print("Change Owed:", abs(totalAmount))
+            break
+        else:
+            continue
+        
+def validate(amount_due, input):
     if input == 5 or input == 10 or input == 25:
         amount_due = amount_due - input
-        print("Amount Due: ", amount_due)
+        return amount_due
     else:
-        print("Amount Due: ", amount_due)
-
-    
-    
+        return amount_due
 main()
