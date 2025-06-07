@@ -13,4 +13,7 @@ for _ in range(3):
     
 print()
 
+for i in range(3, 11):
+    print(i)
+
 print("mann \n" * 3, end="")
