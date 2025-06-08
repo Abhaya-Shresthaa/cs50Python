@@ -7,9 +7,7 @@ while True:
         percentage = int((x/y)*100)
         if x > y:
             continue
-    except ValueError:
-        pass
-    except ZeroDivisionError:
+    except (ValueError, ZeroDivisionError):
         pass
         
     else:
