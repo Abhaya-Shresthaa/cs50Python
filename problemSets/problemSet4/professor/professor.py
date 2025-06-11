@@ -4,8 +4,9 @@ def main():
     score = 0
     level = get_level()
     
-    for _ in range(1, 10):
-        x , y = generate_integer(level)
+    for _ in range(10):
+        x = generate_integer(level)
+        y = generate_integer(level)
         for i in range(3):
             userAns = int(input(f"{x} + {y} = "))
             if(userAns == (x+y)):
@@ -16,6 +17,7 @@ def main():
                 print(f"{x} + {y} = {x+y}")
             else:
                 print("EEE")
+    print("Score:", score)
 
 def get_level():
     while True:
@@ -29,10 +31,13 @@ def get_level():
 
 
 def generate_integer(level):
-    x = randint((10**(level-1)),((10**level)-1))
-    y = randint((10**(level-1)),((10**level)-1))
-    return x,y
-
+    #return randint((10**(level-1)),((10**level)-1))
+    if level == 1:
+        return randint(0,9)
+    elif level == 2:
+        return randint(10, 99)
+    else:
+        return randint(100, 999)
 
 if __name__ == "__main__":
     main()
