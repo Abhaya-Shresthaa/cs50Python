@@ -6,7 +6,7 @@ if len(sys.argv) != 2:
     sys.exit() #terminate the whole program
     
 requests.get("https://itunes.apple.com/search?entity=song&limit=1&term=weezer")
-response = requests.get("https://itunes.apple.com/search?entity=song&limit=10&term=" + sys.argv[1])
+response = requests.get("https://itunes.apple.com/search?entity=song&limit=1&term=" + sys.argv[1])
 
 print(json.dumps(response.json(), indent= 2)) #indent means spacing with 2
 
