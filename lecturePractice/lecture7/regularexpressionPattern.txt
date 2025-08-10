@@ -1,0 +1,37 @@
+. any character
+* 0 or more repetition of any character
++ 1 or more repetition of any character
+? 0 or 1 times of the character only
+{m} m no of repetition
+{m,n} m-n repetition
+
+^ matches the start of the string 
+$ matches the end of the string or just before the newline at the end of the string
+
+[] match these symbols inside that (set of any characters)
+we can use hyphen to get some sets like
+[a-z]
+[^] any symbol except that in it (complement of those set of characters)
+[a-zA-Z0-9_ ] space is also read
+[a-zA-Z0-9_] is equivalent to \w this means any word character
+
+\b for not word character (all except \w)
+\d decimal digit
+\D not a decimal digit
+\s whitespace characters
+\S not a whitespace character
+\w word character ... as well as numbers and the underscore
+\W not a word character
+
+A|B either A or B 
+(...) a group
+(?:...) non-capturing version
+
+we can use flags as well as parameter
+re.IGNORECASE
+re.MULTILINE
+re.DOTALL
+
+other functions
+re.match() don't need to use ^  to match the start
+re.fullmatch() for both start and end 
