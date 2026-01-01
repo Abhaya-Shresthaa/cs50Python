@@ -1,33 +1,27 @@
 import tkinter as tk
-# Assuming gameLogic.py has: def generate_question(): return "2 + 2", 4
-try:
-    from gameLogic import generate_question
-except ImportError:
-    # Fallback for demonstration if gameLogic is missing
-    import random
-    def generate_question():
-        a, b = random.randint(1, 10), random.randint(1, 10)
-        return f"{a} + {b}", a + b
+from gameLogic import generate_question
 
-# --- Global Variables ---
+
+#global variables
 points = 0
 correct_answer = 0
 time_left = 10
 user_name_val = ""
 timer_id = None
 
-
+#game window
 root = tk.Tk()
 root.title("Math Quiz")
 root.geometry("400x400")
 
-# --- Logic Functions ---
 
+#Removes all widgets from the screen.(actually hides)
 def clear_screen():
-    """Removes all widgets from the screen."""
+
     for widget in root.winfo_children():
         widget.pack_forget()
-
+        
+#called only once in first to get name
 def start_quiz():
     global user_name_val, points
     user_name_val = user_entry.get().strip()
@@ -39,7 +33,8 @@ def start_quiz():
     points = 0 # Reset points for new game
     show_quiz_screen()
     load_question()
-
+    
+#level calculating
 def level_select():
     global points
     level =1
@@ -56,7 +51,7 @@ def level_select():
         pass
     return level
     
- 
+#loads question from gameLogic file
 def load_question():
     global correct_answer, time_left, timer_id, points
 
@@ -72,6 +67,7 @@ def load_question():
     leveled_time_left()
     update_timer()
     
+#time left calculation according to level
 def leveled_time_left():
     global time_left
     level = level_select()
@@ -83,7 +79,8 @@ def leveled_time_left():
         time_left = 15
     else:
         time_left = 20
-    
+  
+#updating points accoring to level  
 def points_update():
     global points
     if points < 2:
@@ -95,10 +92,9 @@ def points_update():
     elif points < 26:
         points += 6
     else: 
-        end_game("You won")
-        
+        end_game("You won")      
 
-        
+#submit button functioning       
 def submit(event=None): # Added event=None to allow 'Enter' key support
     global points, timer_id
 
@@ -114,9 +110,9 @@ def submit(event=None): # Added event=None to allow 'Enter' key support
     except ValueError:
         question_label.config(text="Enter a valid number", fg="red")
 
+#timer counter logic
 def update_timer():
     global time_left, timer_id
-
     if time_left > 0:
         timer_label.config(text=f"Time left: {time_left}s")
         time_left -= 1
@@ -124,16 +120,19 @@ def update_timer():
     else:
         end_game("Time's Up!")
 
+#Stops timer and shows the Game Over screen
 def end_game(reason):
-    """Stops timer and shows the Game Over screen."""
+    
     global timer_id
     if timer_id:
         root.after_cancel(timer_id)
     
     show_game_over_screen(reason)
 
-# --- Screen UI Builders ---
 
+#                ----- Screen UI Builders ------
+
+#ui build for name asking page
 def show_start_screen():
     clear_screen()
     user_label.config(text="Enter Your Name:", fg="grey")
@@ -142,6 +141,7 @@ def show_start_screen():
     user_entry.delete(0, tk.END)
     start_btn.pack(pady=20)
 
+#ui build for quiz question showing
 def show_quiz_screen():
     clear_screen()
     timer_label.pack(pady=10)
@@ -154,12 +154,14 @@ def show_quiz_screen():
     level_label.config(text=f"Level: {level_select()}")
     level_label.pack(pady=10)
     
+#calls the quiz screen and initialize points to 0 to restart
 def restart_game():
     global points
     points = 0
     show_quiz_screen()
     load_question()
 
+#game over screen ui 
 def show_game_over_screen(reason):
     clear_screen()
     
@@ -180,12 +182,16 @@ def show_game_over_screen(reason):
                          command=root.quit, bg="pink")
     exit_btn.pack(pady=10)
 
-# --- Initialize Widget Objects (but don't pack them yet) ---
+# --- Initializing Widget Objects --- 
+# the displaying is not done here
+# done by pack used in above functions
 
+# initial page objects
 user_label = tk.Label(root, font=("Arial", 20))
 user_entry = tk.Entry(root, font=("Arial", 20))
 start_btn = tk.Button(root, text="Start Quiz", font=("Arial", 18), command=start_quiz)
 
+# quiz page objects
 timer_label = tk.Label(root, font=("Arial", 20))
 question_label = tk.Label(root, font=("Arial", 22))
 entry = tk.Entry(root, font=("Arial", 20))
@@ -194,6 +200,6 @@ submit_btn = tk.Button(root, text="Submit", font=("Arial", 18), command=submit)
 points_label = tk.Label(root, font=("Arial", 18))
 level_label = tk.Label(root, font=("Arial", 18))
 
-# Start the app
+# Starting the app
 show_start_screen()
 root.mainloop()
