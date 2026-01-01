@@ -14,7 +14,6 @@ root = tk.Tk()
 root.title("Math Quiz")
 root.geometry("400x400")
 
-
 #Removes all widgets from the screen.(actually hides)
 def clear_screen():
 
